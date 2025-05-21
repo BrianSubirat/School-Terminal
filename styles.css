@@ -1,0 +1,199 @@
+body {
+    background: #000;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: monospace;
+}
+
+.terminal {
+    width: 90vw;
+    max-width: 900px;
+    height: 80vh;
+    background: #1a1b1e;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0,255,0,0.15),
+                0 0 60px rgba(0,255,0,0.1);
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.terminal:hover {
+    box-shadow: 0 0 40px rgba(0,255,0,0.2),
+                0 0 80px rgba(0,255,0,0.15);
+    transform: translateY(-2px);
+}
+
+.terminal::before {
+    content: "ATHENA_MS";
+    position: absolute;
+    top: 8px;
+    right: 15px;
+    color: #444;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.terminal-header {
+    background: linear-gradient(to right, #1A1A1A, #252525);
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #333;
+}
+
+.controls {
+    display: flex;
+    gap: 8px;
+}
+
+.control {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.control:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+.red { 
+    background: #FF5F56; 
+    box-shadow: 0 0 10px rgba(255,95,86,0.3); 
+}
+.yellow { 
+    background: #FFBD2E; 
+    box-shadow: 0 0 10px rgba(255,189,46,0.3); 
+}
+.green { 
+    background: #27C93F; 
+    box-shadow: 0 0 10px rgba(39,201,63,0.3); 
+}
+
+.title {
+    color: #888;
+    margin-left: 25px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.terminal-body {
+    padding: 25px;
+    color: #0f0;
+    font-size: 14px;
+    height: calc(100% - 90px);
+    overflow-y: auto;
+    background: linear-gradient(to bottom, #1a1b1e, #1a1b1e);
+}
+
+.terminal-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.terminal-body::-webkit-scrollbar-track {
+    background: #1a1b1e;
+}
+
+.terminal-body::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+#output {
+    margin-bottom: 25px;
+}
+
+#output div {
+    margin: 4px 0;
+    line-height: 1.4;
+    animation: fadeIn 0.2s ease-out forwards;
+}
+
+.input-line {
+    display: flex;
+    align-items: center;
+    background: rgba(0,255,0,0.03);
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.input-line:focus-within {
+    background: rgba(0,255,0,0.05);
+    box-shadow: 0 0 0 1px rgba(0,255,0,0.1);
+}
+
+.prompt {
+    color: #0f0;
+    margin-right: 12px;
+    font-weight: bold;
+}
+
+#commandInput {
+    background: transparent;
+    border: none;
+    color: #0f0;
+    font-family: monospace;
+    font-size: 14px;
+    flex-grow: 1;
+    outline: none;
+    caret-color: #0f0;
+}
+
+.error {
+    color: #ff4444;
+    font-weight: bold;
+}
+
+.success {
+    color: #00ff00;
+    font-weight: bold;
+}
+
+.warning {
+    color: #ffaa00;
+    font-weight: bold;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.cursor {
+    animation: blink 1s infinite;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scanline {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+.terminal::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(0,255,0,0.1);
+    animation: scanline 6s linear infinite;
+    pointer-events: none;
+}
